@@ -14,6 +14,7 @@ class priority_queue {
         void push(T input){
             _size += 1;
             arr[_size] = input;
+            //index
             int child = _size;
             int parent = child/2;
 
@@ -40,20 +41,18 @@ class priority_queue {
             while(child <= _size){
                 //오른쪽 자식이 존재하면서, 왼쪽보다 오른쪽 자식의 값이 더 큰 경우
                 //오른쪽 자식과 비교해야한다.
-                if(child + 1 <= _size && arr[child] < arr[child + 1]){
-                    if(arr[child] < arr[child + 1]){
-                        child += 1;
-                    }
-                    if(arr[parent] < arr[child]){
-                        T temp = arr[child];
-                        arr[child] = arr[parent];
-                        arr[parent] = temp;
-                        parent = child;
-                        child = parent*2;
-                    }
-                    else{
-                        break;
-                    }
+                if((child + 1 <= _size) && (arr[child] < arr[child + 1]))
+                    child += 1;
+                    
+                if(arr[parent] < arr[child]){
+                    T temp = arr[child];
+                    arr[child] = arr[parent];
+                    arr[parent] = temp;
+                    parent = child;
+                    child = parent*2;
+                }
+                else{
+                    break;
                 }
             }
         }
@@ -70,9 +69,11 @@ class priority_queue {
 
 int main(){
     priority_queue<int> pq;
+    
     for(int i=0; i<10; i++){
         pq.push(rand()%100);
     }
+
     while(!pq.empty()){
         cout << pq.top() << "\n";
         pq.pop();
